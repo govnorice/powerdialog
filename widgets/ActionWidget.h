@@ -10,7 +10,7 @@ using namespace std;
 class ActionWidget {
 public:
     ActionWidget();
-    void init(char name, const char *image_path, int size_width, int size_height);
+    void init(const char *name, const char *image_path, int size_width, int size_height);
     void addToBox(GtkWidget *box);
 private:
     GdkPixbuf *image_pixbuf;

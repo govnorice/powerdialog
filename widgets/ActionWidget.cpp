@@ -4,7 +4,7 @@ ActionWidget::ActionWidget() {
 
 }
 
-void ActionWidget::init(char name, const char *image_path, int size_width, int size_height) {
+void ActionWidget::init(const char *name, const char *image_path, int size_width, int size_height) {
     image_pixbuf = gdk_pixbuf_new_from_file_at_size(image_path, size_width, size_height, nullptr);
     if (image_pixbuf == nullptr) {
         cout << "Failed to load image: " << image_path << endl;

@@ -8,6 +8,9 @@
 
 using namespace std;
 
+#define ACTION_WIDTH 80
+#define ACTION_HEIGHT 80
+
 ActionWidget poweroff, suspend, reboot;
 
 void gui(int argc, char *argv[]) {
@@ -23,9 +26,9 @@ void gui(int argc, char *argv[]) {
     GtkWidget *container = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 
     // Action widgets
-    poweroff.init('p', "images/poweroff.svg", 100, 100);
-    suspend.init('p', "images/suspend.svg", 100, 100);
-    reboot.init('p', "images/reboot.svg", 100, 100);
+    poweroff.init("poweroff", "images/poweroff.svg", ACTION_WIDTH, ACTION_HEIGHT);
+    suspend.init("suspend", "images/suspend.svg", ACTION_WIDTH, ACTION_HEIGHT);
+    reboot.init("reboot", "images/reboot.svg", ACTION_WIDTH, ACTION_HEIGHT);
 
     gtk_container_add(GTK_CONTAINER(window), container);
     poweroff.addToBox(container);
