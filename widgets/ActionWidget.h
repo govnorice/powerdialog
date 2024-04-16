@@ -15,6 +15,7 @@ public:
 private:
     GdkPixbuf *image_pixbuf;
     GtkWidget *image;
+    GtkWidget *button;
 };
 
 

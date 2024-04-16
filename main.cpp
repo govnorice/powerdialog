@@ -8,8 +8,8 @@
 
 using namespace std;
 
-#define ACTION_WIDTH 80
-#define ACTION_HEIGHT 80
+#define ACTION_WIDTH 40
+#define ACTION_HEIGHT 40
 
 ActionWidget poweroff, suspend, reboot;
 
@@ -18,7 +18,7 @@ void gui(int argc, char *argv[]) {
 
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), "powerdialog");
-    gtk_window_set_default_size(GTK_WINDOW(window), 400, 140);
+    gtk_window_set_default_size(GTK_WINDOW(window), 400, 100);
     gtk_window_set_type_hint(GTK_WINDOW(window), GDK_WINDOW_TYPE_HINT_DIALOG);
 
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);

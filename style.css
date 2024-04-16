@@ -4,3 +4,29 @@
 window {
     background: black;
 }
+image {
+    margin: 0;
+    padding: 0;
+    padding: 10px;
+}
+button {
+    margin-right: 5em;
+    padding: 0;
+    background: image(transparent);
+    border: none;
+    border-radius: 100%;
+    box-shadow: none;
+}
+#poweroff {
+    margin-left: 4.4em;
+}
+
+#poweroff:hover {
+    background: image(red);
+}
+#suspend:hover {
+    background: image(blue);
+}
+#reboot:hover {
+    background: image(green);
+}
