@@ -2,7 +2,10 @@
 
 Dialogue of shutdown, sleep, reboot PC
 
-[smpl1.mp4](smpl1.mp4)
+<video controls>
+  <source src="smpl1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Warning!
 ### In order for the application to use commands, it is recommended to register it in **/etc/sudoers**
