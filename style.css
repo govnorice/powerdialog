@@ -15,7 +15,6 @@ button {
     background: image(transparent);
     border: none;
     border-radius: 100%;
-    box-shadow: none;
 }
 #poweroff {
     margin-left: 4.4em;

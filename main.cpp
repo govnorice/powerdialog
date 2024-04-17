@@ -1,5 +1,6 @@
 #include <iostream>
 #include <gtk/gtk.h>
+#include <glib.h>
 #include <filesystem>
 
 #include "modules/CssManager.h"
@@ -12,6 +13,11 @@ using namespace std;
 #define ACTION_HEIGHT 40
 
 ActionWidget poweroff, suspend, reboot;
+
+void power_clicked(GtkWidget *widget, gpointer data) {
+    char *command = (char *) data;
+    system(command);
+}
 
 void gui(int argc, char *argv[]) {
     gtk_init(&argc, &argv);
@@ -30,10 +36,15 @@ void gui(int argc, char *argv[]) {
     suspend.init("suspend", "images/suspend.svg", ACTION_WIDTH, ACTION_HEIGHT);
     reboot.init("reboot", "images/reboot.svg", ACTION_WIDTH, ACTION_HEIGHT);
 
+    poweroff.onClicked(G_CALLBACK(power_clicked), (gpointer *)"poweroff");
+    suspend.onClicked(G_CALLBACK(power_clicked), (gpointer *)"systemctl suspend");
+    reboot.onClicked(G_CALLBACK(power_clicked), (gpointer *)"reboot");
+
     gtk_container_add(GTK_CONTAINER(window), container);
     poweroff.addToBox(container);
     suspend.addToBox(container);
     reboot.addToBox(container);
+
 
     //CSS
     CssManager css;
