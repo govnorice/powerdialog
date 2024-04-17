@@ -2,6 +2,8 @@
 
 Dialogue of shutdown, sleep, reboot PC
 
+[smpl1.mp4](smpl1.mp4)
+
 ## Warning!
 ### In order for the application to use commands, it is recommended to register it in **/etc/sudoers**
 
