@@ -2,10 +2,7 @@
 
 Dialogue of shutdown, sleep, reboot PC
 
-<video controls>
-  <source src="smpl1.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://github.com/govnorice/powerdialog/assets/80642969/03da97c3-927d-4c93-ae7d-6adda75fc99b
 
 ## Warning!
 ### In order for the application to use commands, it is recommended to register it in **/etc/sudoers**
