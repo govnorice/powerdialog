@@ -1,3 +1,4 @@
+#include <iostream>
 #include "CssManager.h"
 
 CssManager::CssManager() {
@@ -19,5 +20,7 @@ void CssManager::loadFromFile(const gchar *filename) {
 // Load styles from a string
 void CssManager::loadFromData(const gchar *data) {
     gtk_css_provider_load_from_data(provider, data, -1, nullptr);
-    gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+                                              GTK_STYLE_PROVIDER(provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_USER);
 }
