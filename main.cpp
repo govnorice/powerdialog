@@ -1,16 +1,19 @@
 #include <iostream>
 #include <gtk/gtk.h>
-#include <glib.h>
-#include <filesystem>
 
+// Modules
 #include "modules/CssManager.h"
 
+// Widgets
 #include "widgets/ActionWidget.h"
+
+// Images
+#include "images/images.h"
 
 using namespace std;
 
-#define ACTION_WIDTH 40
-#define ACTION_HEIGHT 40
+#define ACTION_WIDTH 22
+#define ACTION_HEIGHT 22
 
 ActionWidget poweroff, suspend, reboot;
 
@@ -24,7 +27,7 @@ void gui(int argc, char *argv[]) {
 
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), "powerdialog");
-    gtk_window_set_default_size(GTK_WINDOW(window), 400, 100);
+    gtk_window_set_default_size(GTK_WINDOW(window), 300, 80);
     gtk_window_set_type_hint(GTK_WINDOW(window), GDK_WINDOW_TYPE_HINT_DIALOG);
 
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
@@ -32,9 +35,9 @@ void gui(int argc, char *argv[]) {
     GtkWidget *container = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 
     // Action widgets
-    poweroff.init("poweroff", "images/poweroff.svg", ACTION_WIDTH, ACTION_HEIGHT);
-    suspend.init("suspend", "images/suspend.svg", ACTION_WIDTH, ACTION_HEIGHT);
-    reboot.init("reboot", "images/reboot.svg", ACTION_WIDTH, ACTION_HEIGHT);
+    poweroff.init("poweroff", *imageData_poweroff, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
+    suspend.init("suspend", *imageData_suspend, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
+    reboot.init("reboot", *imageData_reboot, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
 
     poweroff.onClicked(G_CALLBACK(power_clicked), (gpointer *)"poweroff");
     suspend.onClicked(G_CALLBACK(power_clicked), (gpointer *)"systemctl suspend");

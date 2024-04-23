@@ -14,25 +14,13 @@ include_directories(${LIBSVG_INCLUDE_DIRS})
 link_libraries(${GTK_LIBRARIES})
 link_libraries(${LIBSVG_LIBRARIES})
 
+# CSS
+configure_file(${CMAKE_SOURCE_DIR}/style.css ${CMAKE_CURRENT_BINARY_DIR}/style.css COPYONLY)
+
 add_executable(powerdialog main.cpp
         modules/CssManager.cpp
         modules/CssManager.h
         widgets/ActionWidget.cpp
-        widgets/ActionWidget.h)
-
-# CSS
-configure_file(${CMAKE_SOURCE_DIR}/style.css ${CMAKE_CURRENT_BINARY_DIR}/style.css COPYONLY)
-
-# images
-set(IMAGES_FILES
-        ${CMAKE_SOURCE_DIR}/images/poweroff.svg
-        ${CMAKE_SOURCE_DIR}/images/suspend.svg
-        ${CMAKE_SOURCE_DIR}/images/reboot.svg
+        widgets/ActionWidget.h
+        images/images.h
 )
-
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/images)
-
-foreach(image ${IMAGES_FILES})
-    get_filename_component(image_name ${image} NAME)
-    configure_file(${image} ${CMAKE_CURRENT_BINARY_DIR}/images/${image_name} COPYONLY)
-endforeach()
