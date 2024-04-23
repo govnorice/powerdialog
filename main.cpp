@@ -1,5 +1,6 @@
 #include <iostream>
 #include <gtk/gtk.h>
+#include <fstream>
 
 // Modules
 #include "modules/CssManager.h"
@@ -9,11 +10,14 @@
 
 // Images
 #include "images/images.h"
+#include "style.hex"
 
 using namespace std;
 
 #define ACTION_WIDTH 22
 #define ACTION_HEIGHT 22
+
+const char *homeDir = getenv("HOME");
 
 ActionWidget poweroff, suspend, reboot;
 
@@ -51,7 +55,11 @@ void gui(int argc, char *argv[]) {
 
     //CSS
     CssManager css;
-    css.loadFromFile("style.css");
+
+    string path = string(homeDir) + "/.config/powerdialog/style.css";
+
+    css.loadFromHex(powerdialog_style_css, powerdialog_style_css_len);
+    css.loadFromFile(path.c_str());
 
     gtk_widget_show_all(window);
 
@@ -59,6 +67,7 @@ void gui(int argc, char *argv[]) {
 }
 
 int main(int argc, char *argv[]) {
+    // Start gui
     gui(argc, argv);
     return 0;
 }
