@@ -15,11 +15,7 @@ link_libraries(${GTK_LIBRARIES})
 link_libraries(${LIBSVG_LIBRARIES})
 
 # CSS
-set(CSS_FILE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/style.css")
 set(STYLE_HEX_FILE "${CMAKE_CURRENT_SOURCE_DIR}/style.hex")
-
-# Convert to style.hex
-execute_process(COMMAND xxd -i "${CSS_FILE_PATH}" "${STYLE_HEX_FILE}")
 
 add_executable(powerdialog main.cpp
         modules/CssManager.cpp
