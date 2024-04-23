@@ -11,7 +11,7 @@ using namespace std;
 class ActionWidget {
 public:
     ActionWidget();
-    void init(const char *name, const char *image_path, int size_width, int size_height);
+    void init(const char *name, guchar *data, int size_width, int size_height);
     void addToBox(GtkWidget *box);
     void onClicked(GCallback callback_func, gpointer *command);
 private:

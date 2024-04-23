@@ -10,14 +10,14 @@ image {
     padding: 10px;
 }
 button {
-    margin-right: 5em;
+    margin-right: 3em;
     padding: 0;
     background: image(transparent);
     border: none;
     border-radius: 100%;
 }
 #poweroff {
-    margin-left: 4.4em;
+    margin-left: 2.4em;
 }
 
 #poweroff:hover {
