@@ -35,9 +35,9 @@ void gui(int argc, char *argv[]) {
     GtkWidget *container = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 
     // Action widgets
-    poweroff.init("poweroff", *imageData_poweroff, ACTION_WIDTH, ACTION_HEIGHT);
-    suspend.init("suspend", *imageData_suspend, ACTION_WIDTH, ACTION_HEIGHT);
-    reboot.init("reboot", *imageData_reboot, ACTION_WIDTH, ACTION_HEIGHT);
+    poweroff.init("poweroff", *imageData_poweroff, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
+    suspend.init("suspend", *imageData_suspend, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
+    reboot.init("reboot", *imageData_reboot, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
 
     poweroff.onClicked(G_CALLBACK(power_clicked), (gpointer *)"poweroff");
     suspend.onClicked(G_CALLBACK(power_clicked), (gpointer *)"systemctl suspend");

@@ -9,8 +9,8 @@ GdkPixbuf *resize_pixbuf(GdkPixbuf *src_pixbuf, int new_width, int new_height) {
     return resized_pixbuf;
 }
 
-void ActionWidget::init(const char *name, guchar *data, int size_width, int size_height) {
-    GdkPixbuf *image_pixbuf = gdk_pixbuf_new_from_data(data, GDK_COLORSPACE_RGB, TRUE, 8, 52, 69, 3 * 69, NULL, NULL);
+void ActionWidget::init(const char *name, guchar *data, int width, int height, int bytes_per_pixel, int size_width, int size_height) {
+    GdkPixbuf *image_pixbuf = gdk_pixbuf_new_from_data(data, GDK_COLORSPACE_RGB, TRUE, 8, width - 17, height, bytes_per_pixel * height, NULL, NULL);
 
     if (image_pixbuf == nullptr) {
         cout << "Failed to load image" << endl;
