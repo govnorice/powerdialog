@@ -1,6 +1,6 @@
 #include <iostream>
 #include <gtk/gtk.h>
-#include <fstream>
+#include <unistd.h>
 
 // Modules
 #include "modules/CssManager.h"
@@ -22,8 +22,12 @@ const char *homeDir = getenv("HOME");
 ActionWidget poweroff, suspend, reboot;
 
 void power_clicked(GtkWidget *widget, gpointer data) {
-    char *command = (char *) data;
-    system(command);
+    auto *pw = (ActionWidget::PowerData *)data;
+    const char *path = pw->path.c_str();
+    const char *arg1 = pw->arg1.c_str();
+    const char *arg2 = pw->arg2.c_str() ? nullptr : pw->arg2.c_str();
+
+    execl(path, arg1, arg2, (char *)nullptr);
 }
 
 void gui(int argc, char *argv[]) {
@@ -43,9 +47,23 @@ void gui(int argc, char *argv[]) {
     suspend.init("suspend", *imageData_suspend, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
     reboot.init("reboot", *imageData_reboot, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
 
-    poweroff.onClicked(G_CALLBACK(power_clicked), (gpointer *)"poweroff");
-    suspend.onClicked(G_CALLBACK(power_clicked), (gpointer *)"systemctl suspend");
-    reboot.onClicked(G_CALLBACK(power_clicked), (gpointer *)"reboot");
+    // Clicked widget
+    ActionWidget::PowerData pw1;
+    pw1.path = "/sbin/poweroff";
+    pw1.arg1 = "poweroff";
+
+    ActionWidget::PowerData pw2;
+    pw2.path = "/usr/bin/systemctl";
+    pw2.arg1 = "systemctl";
+    pw2.arg2 = "suspend";
+
+    ActionWidget::PowerData pw3;
+    pw3.path = "/sbin/reboot";
+    pw3.arg1 = "reboot";
+
+    poweroff.onClicked(G_CALLBACK(power_clicked), &pw1);
+    suspend.onClicked(G_CALLBACK(power_clicked), &pw2);
+    reboot.onClicked(G_CALLBACK(power_clicked), &pw3);
 
     gtk_container_add(GTK_CONTAINER(window), container);
     poweroff.addToBox(container);
