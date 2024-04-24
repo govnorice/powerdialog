@@ -40,6 +40,6 @@ void ActionWidget::addToBox(GtkWidget *box) {
     }
 }
 
-void ActionWidget::onClicked(GCallback callback_func, gpointer *command) {
-    g_signal_connect(button, "clicked", G_CALLBACK(callback_func), (gpointer)command);
+void ActionWidget::onClicked(GCallback callback_func, PowerData *pw) {
+    g_signal_connect(button, "clicked", G_CALLBACK(callback_func), (gpointer)pw);
 }
