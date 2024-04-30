@@ -19,19 +19,17 @@ using namespace std;
 #define ACTION_HEIGHT 22
 
 const char *homeDir = getenv("HOME");
-string session_id;
 
 ActionWidget poweroff, suspend, reboot, logout;
+string session_id;
 
 void power_clicked(GtkWidget *widget, gpointer data) {
     auto *pw = (ActionWidget::PowerData *)data;
     const char *path = pw->path.c_str();
     const char *arg1 = pw->arg1.c_str();
-    const char *arg2 = pw->arg2.c_str();
-
+    const char *arg2 = pw->arg2.c_str() ? nullptr : pw->arg2.c_str();
 
     string session_id = getenv("XDG_SESSION_ID");
-    cout << session_id << endl;
     execl(path, arg1, arg2, session_id.c_str(), (char *)nullptr);
 }
 
