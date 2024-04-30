@@ -1,6 +1,7 @@
 #include <iostream>
 #include <gtk/gtk.h>
 #include <unistd.h>
+#include <cstdlib>
 
 // Modules
 #include "modules/CssManager.h"
@@ -18,16 +19,20 @@ using namespace std;
 #define ACTION_HEIGHT 22
 
 const char *homeDir = getenv("HOME");
+string session_id;
 
-ActionWidget poweroff, suspend, reboot;
+ActionWidget poweroff, suspend, reboot, logout;
 
 void power_clicked(GtkWidget *widget, gpointer data) {
     auto *pw = (ActionWidget::PowerData *)data;
     const char *path = pw->path.c_str();
     const char *arg1 = pw->arg1.c_str();
-    const char *arg2 = pw->arg2.c_str() ? nullptr : pw->arg2.c_str();
+    const char *arg2 = pw->arg2.c_str();
 
-    execl(path, arg1, arg2, (char *)nullptr);
+
+    string session_id = getenv("XDG_SESSION_ID");
+    cout << session_id << endl;
+    execl(path, arg1, arg2, session_id.c_str(), (char *)nullptr);
 }
 
 void gui(int argc, char *argv[]) {
@@ -35,7 +40,8 @@ void gui(int argc, char *argv[]) {
 
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), "powerdialog");
-    gtk_window_set_default_size(GTK_WINDOW(window), 300, 80);
+    gtk_window_set_default_size(GTK_WINDOW(window), 400, 80);
+    gtk_window_set_resizable (GTK_WINDOW(window), FALSE);
     gtk_window_set_type_hint(GTK_WINDOW(window), GDK_WINDOW_TYPE_HINT_DIALOG);
 
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
@@ -46,6 +52,7 @@ void gui(int argc, char *argv[]) {
     poweroff.init("poweroff", *imageData_poweroff, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
     suspend.init("suspend", *imageData_suspend, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
     reboot.init("reboot", *imageData_reboot, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
+    logout.init("logout", *imageData_logout, IMAGE_WIDTH, IMAGE_HEIGHT, BYTES_PER_PIXEL, ACTION_WIDTH, ACTION_HEIGHT);
 
     // Clicked widget
     ActionWidget::PowerData pw1;
@@ -61,15 +68,21 @@ void gui(int argc, char *argv[]) {
     pw3.path = "/sbin/reboot";
     pw3.arg1 = "reboot";
 
+    ActionWidget::PowerData pw4;
+    pw4.path = "/usr/bin/loginctl";
+    pw4.arg1 = "loginctl";
+    pw4.arg2 = "kill-session" + session_id;
+
     poweroff.onClicked(G_CALLBACK(power_clicked), &pw1);
     suspend.onClicked(G_CALLBACK(power_clicked), &pw2);
     reboot.onClicked(G_CALLBACK(power_clicked), &pw3);
+    logout.onClicked(G_CALLBACK(power_clicked), &pw4);
 
     gtk_container_add(GTK_CONTAINER(window), container);
     poweroff.addToBox(container);
     suspend.addToBox(container);
     reboot.addToBox(container);
-
+    logout.addToBox(container);
 
     //CSS
     CssManager css;
