@@ -29,6 +29,3 @@ button {
 #reboot:hover {
     background: image(green);
 }
-#logout:hover {
-    background: image(yellow);
-}

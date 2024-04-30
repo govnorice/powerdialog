@@ -15,8 +15,7 @@ link_libraries(${GTK_LIBRARIES})
 link_libraries(${LIBSVG_LIBRARIES})
 
 # CSS
-set(STYLE_HEX_FILE "${CMAKE_CURRENT_SOURCE_DIR}/style.hex"
-        images/images.h)
+set(STYLE_HEX_FILE "${CMAKE_CURRENT_SOURCE_DIR}/style.hex")
 
 add_executable(powerdialog main.cpp
         modules/CssManager.cpp
