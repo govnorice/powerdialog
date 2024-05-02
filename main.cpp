@@ -19,24 +19,26 @@ using namespace std;
 #define ACTION_HEIGHT 22
 
 const char *homeDir = getenv("HOME");
-string session_id;
 
 ActionWidget poweroff, suspend, reboot, logout;
 
 void power_clicked(GtkWidget *widget, gpointer data) {
     auto *pw = (ActionWidget::PowerData *)data;
-    const char *path = pw->path.c_str();
-    const char *arg1 = pw->arg1.c_str();
-    const char *arg2 = pw->arg2.c_str();
+    const string path = pw->path;
+    const string arg1 = pw->arg1;
+    const string arg2 = pw->arg2;
+    const string session_id = getenv("XDG_SESSION_ID");
 
-    string session_id = getenv("XDG_SESSION_ID");
-    if (strcmp(arg2, "suspend") == 0) {
-        execl(path, arg1, arg2, (char *)nullptr);
-    } if (strcmp(arg2, "kill-session") == 0) {
-        execl(path, arg1, "kill-session", session_id.c_str(), (char *)nullptr);
-    } else {
-        execl(path, arg1, (char *)nullptr);
+    if (arg2 == "suspend") {
+        execl(path.c_str(), arg1.c_str(), arg2.c_str(), (char *)nullptr);
+        return;
     }
+    if (arg2 == "kill-session") {
+        execl(path.c_str(), arg1.c_str(), "kill-session", session_id.c_str(), (char *)nullptr);
+        return;
+    }
+
+    execl(path.c_str(), arg1.c_str(), (char *)nullptr);
 }
 
 void gui(int argc, char *argv[]) {
