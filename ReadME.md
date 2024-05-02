@@ -8,19 +8,21 @@ https://github.com/govnorice/powerdialog/assets/80642969/0a5b3b90-7836-4e11-a46b
 
 Aur Ready!
 Use Aur-helper utility(example - yay)
-
+```
 yay -S powerdialog
+```
 # OR
 Download executable file and move to /usr/bin:
 
+```
 cd download_location
-
 sudo mv powerdialog /usr/bin/powerdialog
+```
 
 # HOW TO USE
 
 hyprland example:
-
+```
 bind = $mainMod, P, exec, powerdialog
-
+```
 
