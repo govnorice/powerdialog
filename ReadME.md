@@ -1,19 +1,13 @@
 # powerdialog
 
-Dialogue of shutdown, sleep, reboot PC
+Dialogue of shutdown, logout, sleep, reboot PC
 
-https://github.com/govnorice/powerdialog/assets/80642969/03da97c3-927d-4c93-ae7d-6adda75fc99b
+https://github.com/govnorice/powerdialog/assets/80642969/0a5b3b90-7836-4e11-a46b-d4101625a4e5
 
-## Wayland tailing WM warning
+# HOW TO USE
 
-GTK3 cannot make window float on Wayland using GDK_WINDOW_TYPE_HINT_DIALOG!
+hyprland example:
 
-**Use floating rules for your wayland WM!**
+sudo mv powerdialog /usr/bin/
 
-### Example hypland:
-
-hyprland.conf
-
-```hyprland.conf
-windowrule = float, ^(mixerdialog)$
-```
+bind = $mainMod, P, exec, powerdialog
