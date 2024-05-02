@@ -27,12 +27,16 @@ void power_clicked(GtkWidget *widget, gpointer data) {
     auto *pw = (ActionWidget::PowerData *)data;
     const char *path = pw->path.c_str();
     const char *arg1 = pw->arg1.c_str();
-    const char *arg2 = pw->arg2.c_str() ? nullptr : pw->arg2.c_str();
-
+    const char *arg2 = pw->arg2.c_str();
 
     string session_id = getenv("XDG_SESSION_ID");
-    cout << session_id << endl;
-    execl(path, arg1, arg2, session_id.c_str(), (char *)nullptr);
+    if (strcmp(arg2, "suspend") == 0) {
+        execl(path, arg1, arg2, (char *)nullptr);
+    } if (strcmp(arg2, "kill-session") == 0) {
+        execl(path, arg1, "kill-session", session_id.c_str(), (char *)nullptr);
+    } else {
+        execl(path, arg1, (char *)nullptr);
+    }
 }
 
 void gui(int argc, char *argv[]) {
@@ -56,7 +60,7 @@ void gui(int argc, char *argv[]) {
 
     // Clicked widget
     ActionWidget::PowerData pw1;
-    pw1.path = "/sbin/poweroff";
+    pw1.path = "/usr/bin/poweroff";
     pw1.arg1 = "poweroff";
 
     ActionWidget::PowerData pw2;
@@ -65,13 +69,13 @@ void gui(int argc, char *argv[]) {
     pw2.arg2 = "suspend";
 
     ActionWidget::PowerData pw3;
-    pw3.path = "/sbin/reboot";
+    pw3.path = "/usr/bin/reboot";
     pw3.arg1 = "reboot";
 
     ActionWidget::PowerData pw4;
     pw4.path = "/usr/bin/loginctl";
     pw4.arg1 = "loginctl";
-    pw4.arg2 = "kill-session" + session_id;
+    pw4.arg2 = "kill-session";
 
     poweroff.onClicked(G_CALLBACK(power_clicked), &pw1);
     suspend.onClicked(G_CALLBACK(power_clicked), &pw2);
