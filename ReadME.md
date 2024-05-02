@@ -8,6 +8,6 @@ https://github.com/govnorice/powerdialog/assets/80642969/0a5b3b90-7836-4e11-a46b
 
 hyprland example:
 
-sudo mv powerdialog /usr/bin/
+sudo mv powerdialog /usr/bin/powerdialog
 
 bind = $mainMod, P, exec, powerdialog
