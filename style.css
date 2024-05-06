@@ -16,19 +16,22 @@ button {
     border: none;
     border-radius: 100%;
 }
+button:focus {
+    outline: none;
+}
 #poweroff {
     margin-left: 2.8em;
 }
 
-#poweroff:hover {
+#poweroff:hover, #poweroff:focus {
     background: image(red);
 }
-#suspend:hover {
+#suspend:hover, #suspend:focus {
     background: image(blue);
 }
-#reboot:hover {
+#reboot:hover, #reboot:focus {
     background: image(green);
 }
-#logout:hover {
+#logout:hover, #logout:focus {
     background: image(#720cad);
 }
