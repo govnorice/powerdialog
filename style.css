@@ -30,5 +30,5 @@ button {
     background: image(green);
 }
 #logout:hover {
-    background: image(yellow);
+    background: image(#720cad);
 }
