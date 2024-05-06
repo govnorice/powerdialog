@@ -2,7 +2,7 @@
 
 Dialogue of shutdown, logout, sleep, reboot PC
 
-https://github.com/govnorice/powerdialog/assets/80642969/0a5b3b90-7836-4e11-a46b-d4101625a4e5
+https://github.com/govnorice/powerdialog/assets/80642969/c9da78da-2c6e-497f-b96e-89570ffad2ca
 
 # INSTALL ARCH LINUX AND OTHER
 
