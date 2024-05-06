@@ -95,7 +95,7 @@ void gui(int argc, char *argv[]) {
 
     string path = string(homeDir) + "/.config/powerdialog/style.css";
 
-    css.loadFromHex(powerdialog_style_css, powerdialog_style_css_len);
+    css.loadFromHex(style_css, style_css_len);
     css.loadFromFile(path.c_str());
 
     gtk_widget_show_all(window);
