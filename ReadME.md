@@ -12,14 +12,31 @@ Just install the package from the AUR, damn it!
 yay -S powerdialog
 ```
 # OR
-Download executable file and move to /usr/bin:
+1. Download executable file and move to /usr/bin:
 
 ```
 cd download_location
 chmod +x powerdialog
 sudo mv powerdialog /usr/bin/powerdialog
 ```
-
+2. Create polkit rule in "/etc/polkit-1/rules.d/powerdialog.rules":
+```
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.login1.power-off" ||
+        action.id == "org.freedesktop.login1.reboot" ||
+        action.id == "org.freedesktop.login1.suspend" ||
+        action.id == "org.freedesktop.login1.hibernate") {
+        if (subject.user == "root" &&
+            subject.process.binary == "/usr/bin/powerdialog") {
+            return polkit.Result.YES;
+        }
+    }
+});
+```
+3. Restart polkit service
+```
+sudo systemctl restart polkit.service
+```
 # HOW TO USE
 
 hyprland example:
