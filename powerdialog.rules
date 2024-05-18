@@ -1,0 +1,11 @@
+polkit.addRule(function(action, subject) {
+      if (action.id == "org.freedesktop.login1.power-off" ||
+          action.id == "org.freedesktop.login1.reboot" ||
+          action.id == "org.freedesktop.login1.suspend" ||
+          action.id == "org.freedesktop.login1.hibernate") {
+          if (subject.user == "root" &&
+              subject.process.binary == "/usr/bin/powerdialog") {
+              return polkit.Result.YES;
+          }
+      }
+});
