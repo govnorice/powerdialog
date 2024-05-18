@@ -1,0 +1,31 @@
+[package]
+name = "powerdialog"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+gdk = "0.18.0"
+gtk = "0.18.1"
+system_shutdown = "4.0.1"
+
+[profile.release]
+opt-level = "s"  # Минимизация размера
+lto = "fat"     # Включение Link Time Optimization
+debug = true # Отключение отладочной информации
+codegen-units = 1  # Дополнительная оптимизация за счет компиляции всех юнитов вместе
+panic = 'abort'    # Опционально: уменьшение размера путем отключения обработки паники
+strip = true
+debug-assertions = false
+overflow-checks = false
+
+[profile.dev]
+opt-level = 0
+debug = true
+strip = "none"
+debug-assertions = true
+overflow-checks = true
+lto = false
+panic = 'unwind'
+incremental = true
+codegen-units = 256
+rpath = false
